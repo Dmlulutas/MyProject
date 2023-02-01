@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="avatar_image_style">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">2dp</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="color">@color/gold</item>
+
+    </style>
+</resources>
