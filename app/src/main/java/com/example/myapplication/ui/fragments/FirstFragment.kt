@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -17,75 +18,70 @@ import com.example.myapplication.data.models.Character
 import com.example.myapplication.databinding.CharacterDetailBinding
 import com.example.myapplication.databinding.FragmentFirstBinding
 import com.example.myapplication.ui.adapters.CharactersAdapter
+import com.example.myapplication.ui.adapters.LoadMoreAdapter
 import com.example.myapplication.ui.viewModels.CharactersViewModel
-import com.example.myapplication.ui.viewModels.FirstViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FirstFragment : Fragment() {
-    private lateinit var charactersAdapter: CharactersAdapter
-    private lateinit var firstViewModel: FirstViewModel
-    private lateinit var charsViewModel: CharactersViewModel
+    /* private lateinit var charactersAdapter: CharactersAdapter
+     private lateinit var firstViewModel: FirstViewModel
+     private lateinit var charsViewModel: CharactersViewModel
 
-    private var _binding: FragmentFirstBinding? = null
-    private val binding get() = _binding!!
+     private var _binding: FragmentFirstBinding? = null
+     private val binding get() = _binding!!*/
+    @Inject
+    lateinit var charAdapter: CharactersAdapter
+    private lateinit var binding: FragmentFirstBinding
+    private val charViewModel: CharactersViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        binding = FragmentFirstBinding.inflate(layoutInflater, container, false)
+        // _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //firstViewModel = ViewModelProvider(requireActivity())[FirstViewModel::class.java]
-        charsViewModel = ViewModelProvider(requireActivity())[CharactersViewModel::class.java]
-
-        charactersAdapter = CharactersAdapter()
-
         binding.apply {
 
+            lifecycleScope.launchWhenCreated {
+                charViewModel.charList.collect {
+                    charAdapter.submitData(it)
+                }
+            }
+
+             charAdapter.setOnItemClickListener {
+               //  val direction = MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(it.id)
+                // findNavController().navigate(direction)
+             }
+
+            lifecycleScope.launchWhenCreated {
+                charAdapter.loadStateFlow.collect {
+                    val state = it.refresh
+                    prgBarCharacters.isVisible = state is LoadState.Loading
+                }
+            }
+
+
             charactersRecycler.apply {
-                if (layoutManager == null) {
-                    layoutManager = LinearLayoutManager(requireActivity())
-                }
-                adapter = charactersAdapter
-
-                lifecycleScope.launchWhenCreated {
-                    charactersAdapter.loadStateFlow.collect {
-                        val state = it.refresh
-                        prgBarCharacters.isVisible = state is LoadState.Loading
-                    }
-                }
-
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = charAdapter
             }
-        }
 
-        //getCharList(1)
-        //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-
-    }
-
-    private fun getCharList(page: Int) {
-        firstViewModel.getCharacters(page)
-        firstViewModel.characters.observe(requireActivity()) {
-
-            binding.apply {
-
-                charactersRecycler.apply {
-                    if (layoutManager == null) {
-                        layoutManager = LinearLayoutManager(requireActivity())
-                    }
-                    adapter = charactersAdapter
+            charactersRecycler.adapter = charAdapter.withLoadStateFooter(
+                LoadMoreAdapter {
+                    charAdapter.retry()
                 }
-
-            }
+            )
 
         }
     }
+
 
     private fun createModal(item: Character) {
         val dialog = activity?.let { Dialog(it) }
@@ -99,11 +95,6 @@ class FirstFragment : Fragment() {
         }
         activity?.let { Glide.with(it).load(item.image).into(binding.avatar) }
         dialog?.show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }
