@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,8 +55,7 @@ class FirstFragment : Fragment() {
             }
 
              charAdapter.setOnItemClickListener {
-               //  val direction = MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(it.id)
-                // findNavController().navigate(direction)
+                 createModal(it)
              }
 
             lifecycleScope.launchWhenCreated {
@@ -78,7 +76,6 @@ class FirstFragment : Fragment() {
                     charAdapter.retry()
                 }
             )
-
         }
     }
 

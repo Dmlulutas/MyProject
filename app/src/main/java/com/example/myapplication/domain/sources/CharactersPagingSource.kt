@@ -1,11 +1,10 @@
-package com.example.myapplication.domain.paging
+package com.example.myapplication.domain.sources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.myapplication.data.models.Character
 import com.example.myapplication.domain.repositories.CharacterRepository
 import retrofit2.HttpException
-import retrofit2.Response
 
 class CharactersPagingSource(
     private val repository: CharacterRepository ,
@@ -32,10 +31,8 @@ class CharactersPagingSource(
 
     }
 
-
     override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
         return null
     }
-
 
 }

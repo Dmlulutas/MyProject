@@ -8,7 +8,7 @@
 
 
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
+    <string name="first_fragment_label">Avatar List</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="settings_fragment_label">Settings Fragment</string>
     <string name="help_fragment_label">Help Fragment</string>
