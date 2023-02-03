@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
         startAnimation()
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
 
         }, 4000)
