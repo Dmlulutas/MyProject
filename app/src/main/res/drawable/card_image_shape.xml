@@ -7,7 +7,7 @@
         android:topLeftRadius="30dp"
         android:topRightRadius="30dp" />
     <solid
-        android:color="@android:color/darker_gray">
+        android:color="@color/background_middle2_android_color">
     </solid>
 
 </shape>

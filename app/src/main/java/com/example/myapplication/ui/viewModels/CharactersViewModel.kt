@@ -6,11 +6,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.example.myapplication.data.models.CharResponse
-import com.example.myapplication.domain.paging.CharactersPagingSource
+import com.example.myapplication.domain.sources.CharactersPagingSource
 import com.example.myapplication.domain.repositories.CharacterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,16 +21,14 @@ class CharactersViewModel @Inject constructor(private val charRepository: Charac
         CharactersPagingSource(charRepository)
     }.flow.cachedIn(viewModelScope)
 
-
-    //api
-    val detailsChar = MutableLiveData<CharResponse>()
-
-    fun charDetailsCharacter(page: Int) = viewModelScope.launch {
+   /* //Api
+    val detailsChar = MutableLiveData<CharDetailsResponse>()
+    fun loadDetailsMovie(id: Int) = viewModelScope.launch {
         loading.postValue(true)
-        val response = charRepository.getCharacters(page)
+        val response = repository.getCharDetails(id)
         if (response.isSuccessful) {
             detailsChar.postValue(response.body())
         }
         loading.postValue(false)
-    }
+    }*/
 }

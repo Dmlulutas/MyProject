@@ -12,4 +12,20 @@
     <color name="navy_blue">#FF00000D</color>
     <color name="dark_blue">#FF152238</color>
     <color name="dark_blue2">#FF0A0F18</color>
+    <color name="dark_blue3">#F08585</color>
+
+
+    <color name="background_android_color">#090909</color>
+    <color name="background_color">#FF090909</color>
+    <color name="background_middle1_android_color">#1F2024</color>
+    <color name="background_middle1_color">#FF1F2024</color>
+    <color name="background_middle2_android_color">#222327</color>
+    <color name="background_middle2_color">#FF222327</color>
+    <color name="background_middle3_android_color">#2C2C2E</color>
+    <color name="background_middle3_color">#FF2C2C2E</color>
+    <color name="background_middle4_color">#FF585858</color>
+
+
+
+
 </resources>

@@ -7,7 +7,7 @@
     android:layout_height="120dp"
     android:layout_marginEnd="2dp"
     android:layout_marginStart="2dp"
-    app:cardBackgroundColor="@color/dark_blue2"
+    app:cardBackgroundColor="@color/background_middle1_color"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
@@ -53,8 +53,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/gender"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="@color/gold" />
+                android:text="Gender"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="@color/background_middle4_color" />
 
         </LinearLayout>
     </LinearLayout>
