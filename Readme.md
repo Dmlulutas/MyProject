@@ -9,9 +9,9 @@
 
 
 # TODO List
-# Work Manager (wifi connection)
-# Room Data (basket)
-# Interceptor (mock data)
+## Work Manager (wifi connection)
+## Room Data (basket)
+## Interceptor (mock data)
 
 
 # some usefull sources
