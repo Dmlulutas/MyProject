@@ -43,7 +43,10 @@ dependencies {
     def lifecycle_version = "2.3.1"
     def retrofit_version = "2.9.0"
     def dagger_version = "2.43.1"
+    def dagger_test_version= "2.28-alpha"
     def glide_version = "4.13.0"
+    def paging_version = "3.1.1"
+
     implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
@@ -55,10 +58,21 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
-    //test
+    //Testing
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:2.11.0'
+    testImplementation 'android.arch.core:core-testing:1.1.1'
+    testImplementation "com.google.truth:truth:1.1"
+    // For Robolectric tests.
+    testImplementation("com.google.dagger:hilt-android-testing:$dagger_test_version")
+    // For instrumented tests.
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$dagger_test_version")
+    // ...with Kotlin.
+    kaptTest("com.google.dagger:hilt-android-compiler:2.40.5")
 
     // - - ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -87,15 +101,15 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$dagger_version"
 
     // Pagination
-    implementation "androidx.paging:paging-common:3.1.1"
-    implementation "androidx.paging:paging-runtime:3.1.1"
+    implementation "androidx.paging:paging-common:$paging_version"
+    implementation "androidx.paging:paging-runtime:$paging_version"
     //optional dependency for RxJava support
-    implementation "androidx.paging:paging-rxjava2-ktx:3.1.1"
+    implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
 
     //optional room db
-    implementation "androidx.room:room-runtime:2.3.0-alpha02"
-    implementation "androidx.room:room-ktx:2.3.0-alpha02"
-    kapt "androidx.room:room-compiler:2.3.0-alpha02"
+    implementation "androidx.room:room-runtime:2.5.0"
+    implementation "androidx.room:room-ktx:2.5.0"
+    kapt "androidx.room:room-compiler:2.5.0"
 
 
 }

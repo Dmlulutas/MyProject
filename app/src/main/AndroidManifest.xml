@@ -15,10 +15,7 @@
             android:name=".AuthActivity"
             android:exported="false"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
