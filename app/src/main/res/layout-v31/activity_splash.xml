@@ -7,6 +7,16 @@
     android:background="@color/splash_background"
     tools:context=".SplashActivity">
 
+    <TextView
+        android:color="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Acil Psikolojik Yardım"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <ImageView
         android:id="@+id/splash_img"
         android:layout_width="250dp"
