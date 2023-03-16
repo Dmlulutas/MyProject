@@ -15,6 +15,10 @@
         <entry key="..\:/MyApplication/app/src/main/res/layout/item_char_list.xml" value="0.23125996810207336" />
         <entry key="..\:/MyApplication/app/src/main/res/menu/menu_main.xml" value="0.1046875" />
         <entry key="..\:/MyApplication/app/src/main/res/xml/anim_test.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/add_basket_btn_shape.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-v31/activity_splash.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/character_detail.xml" value="0.13728470111448834" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
       </map>
     </option>
   </component>

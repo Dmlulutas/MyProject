@@ -3,12 +3,15 @@ package com.example.myapplication.ui.fragments
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.clearFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +21,8 @@ import com.example.myapplication.databinding.CharacterDetailBinding
 import com.example.myapplication.databinding.FragmentFirstBinding
 import com.example.myapplication.ui.adapters.CharactersAdapter
 import com.example.myapplication.ui.adapters.LoadMoreAdapter
-import com.example.myapplication.ui.viewModels.CharactersViewModel
+import com.example.myapplication.ui.viewModels.main.CharactersViewModel
+import com.example.myapplication.utils.ApiState
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,7 +41,7 @@ class FirstFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentFirstBinding.inflate(layoutInflater, container, false)
         // _binding = FragmentFirstBinding.inflate(inflater, container, false)
@@ -46,7 +50,40 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
+
+            charViewModel.getCharList(1)
+            lifecycleScope.launchWhenStarted {
+                charViewModel.postStateFlow.collect { it ->
+
+                    when (it) {
+                        is ApiState.Loading -> {
+                        }
+                        is ApiState.Failure -> {
+                           Log.d("test","test1")
+                        }
+                        is ApiState.Success<*> -> {
+                            Log.d("test","test2")
+                           // it.results
+                           /* binding.rvExpenseList.isVisible = true
+                            val result = it.result as AlertsResponseClass
+                            alertsList = result.alerts
+                            postAdapter.setData(result.alerts)
+                            postAdapter.notifyDataSetChanged()
+                            for (i in 0 until result.alerts.size) {
+                                //saving to db
+                                alertViewModel.insert(result.alerts.get(i))
+                            }*/
+                        }
+                        is ApiState.Empty -> {
+
+                        }
+                    }
+                    Log.d("test",it.toString())
+                   //charAdapter.submitData(it)
+                }
+            }
 
             lifecycleScope.launchWhenCreated {
                 charViewModel.charList.collect {
@@ -54,9 +91,9 @@ class FirstFragment : Fragment() {
                 }
             }
 
-             charAdapter.setOnItemClickListener {
-                 createModal(it)
-             }
+            charAdapter.setOnItemClickListener {
+                createModal(it)
+            }
 
             lifecycleScope.launchWhenCreated {
                 charAdapter.loadStateFlow.collect {
@@ -78,7 +115,6 @@ class FirstFragment : Fragment() {
             )
         }
     }
-
 
     private fun createModal(item: Character) {
         val dialog = activity?.let { Dialog(it) }

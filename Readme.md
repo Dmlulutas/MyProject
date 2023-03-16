@@ -1,18 +1,20 @@
 # Project Content
 ## Kotlin
 ## MVVM
+## Repository pattern
 ## Retrofit
 ## Dagger Hilt
 ## Live data
 ## viewBinding
 ## pagination
 ## room data
+## Interceptor
 
 
 # TODO List
 ## Work Manager (wifi connection)
 ## Room Data (basket)
-## Interceptor (mock data)
+
 
 
 # some usefull sources
